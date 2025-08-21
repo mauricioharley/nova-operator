@@ -1,0 +1,23 @@
+# KUTTL test relies on the ApplicationCredential controller's built-in test environment detection
+# and mock credential creation for environments without KeystoneAPI
+
+# Create required secret for service password
+apiVersion: v1
+kind: Secret
+metadata:
+  name: nova-service-password
+data:
+  # ServicePassword: test123 (base64 encoded)
+  ServicePassword: dGVzdDEyMw==
+
+---
+# KeystoneApplicationCredential resource for testing
+apiVersion: keystone.openstack.org/v1beta1
+kind: KeystoneApplicationCredential
+metadata:
+  name: nova-applicationcredential
+spec:
+  userName: nova
+  secret: nova-service-password
+  expirationDays: 7  # Fixed: must be >= 2
+  gracePeriodDays: 2  # Fixed: must be >= 1 and < expirationDays

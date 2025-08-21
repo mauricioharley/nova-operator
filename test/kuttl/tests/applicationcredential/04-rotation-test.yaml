@@ -1,0 +1,12 @@
+# Test ApplicationCredential rotation by creating a second credential
+# This tests that the system can handle credential updates
+
+apiVersion: keystone.openstack.org/v1beta1
+kind: KeystoneApplicationCredential
+metadata:
+  name: nova-rotating-credential
+spec:
+  userName: nova
+  secret: nova-service-password
+  expirationDays: 3  # Shorter expiration for testing rotation
+  gracePeriodDays: 1

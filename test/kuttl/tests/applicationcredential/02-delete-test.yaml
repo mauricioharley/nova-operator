@@ -1,0 +1,9 @@
+# Test deletion and cleanup of ApplicationCredential
+# This verifies that resources are properly cleaned up
+
+# Delete the KeystoneApplicationCredential
+apiVersion: keystone.openstack.org/v1beta1
+kind: KeystoneApplicationCredential
+metadata:
+  name: nova-applicationcredential
+$patch: delete

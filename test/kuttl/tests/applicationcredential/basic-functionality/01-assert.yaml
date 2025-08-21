@@ -1,0 +1,32 @@
+# Assert that the KeystoneApplicationCredential reaches Ready status with all conditions
+apiVersion: keystone.openstack.org/v1beta1
+kind: KeystoneApplicationCredential
+metadata:
+  name: nova-applicationcredential
+status:
+  conditions:
+    - type: Ready
+      status: "True"
+    - type: ApplicationCredentialReady
+      status: "True"
+    - type: InputReady
+      status: "True"
+    - type: KeystoneAPIReady
+      status: "True"
+
+---
+# Assert that the application credential secret was created with proper data
+apiVersion: v1
+kind: Secret
+metadata:
+  name: nova-applicationcredential-application-credential
+data:
+  id: dGVzdC1hcHAtY3JlZC1pZC1ub3ZhLWFwcGxpY2F0aW9uY3JlZGVudGlhbA== # test-app-cred-id-nova-applicationcredential (base64)
+  secret: dGVzdC1hcHAtY3JlZC1zZWNyZXQtbm92YS1hcHBsaWNhdGlvbmNyZWRlbnRpYWw= # test-app-cred-secret-nova-applicationcredential (base64)
+
+---
+# Assert that the original service password secret still exists
+apiVersion: v1
+kind: Secret
+metadata:
+  name: nova-service-password

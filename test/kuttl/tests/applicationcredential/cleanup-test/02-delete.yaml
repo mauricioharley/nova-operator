@@ -1,0 +1,6 @@
+# Delete the ApplicationCredential to test cleanup
+apiVersion: keystone.openstack.org/v1beta1
+kind: KeystoneApplicationCredential
+metadata:
+  name: nova-cleanup-credential
+$patch: delete

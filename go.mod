@@ -87,6 +87,9 @@ require (
 
 replace github.com/openstack-k8s-operators/nova-operator/api => ./api
 
+// Use Deydra71's keystone-operator fork with ApplicationCredential support
+replace github.com/openstack-k8s-operators/keystone-operator/api => github.com/Deydra71/keystone-operator/api v0.0.0-20250819113136-60db36779dbc
+
 // mschuppert: map to latest commit from release-4.16 tag
 // must consistent within modules and service operators
 replace github.com/openshift/api => github.com/openshift/api v0.0.0-20240830023148-b7d0481c9094 //allow-merging

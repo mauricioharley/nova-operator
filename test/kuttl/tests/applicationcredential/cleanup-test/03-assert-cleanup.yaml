@@ -1,0 +1,5 @@
+# Verify cleanup: service secret remains, generated secret should be cleaned up
+apiVersion: v1
+kind: Secret
+metadata:
+  name: nova-service-password

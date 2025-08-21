@@ -447,6 +447,9 @@ func NewReconcilers(mgr ctrl.Manager, kclient *kubernetes.Clientset) *Reconciler
 			"NovaCompute": &NovaComputeReconciler{
 				ReconcilerBase: NewReconcilerBase(mgr, kclient),
 			},
+			"ApplicationCredential": &ApplicationCredentialReconciler{
+				ReconcilerBase: NewReconcilerBase(mgr, kclient),
+			},
 		}}
 }
 

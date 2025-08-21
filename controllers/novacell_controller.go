@@ -171,7 +171,7 @@ func (r *NovaCellReconciler) Reconcile(ctx context.Context, req ctrl.Request) (r
 		return result, err
 	}
 
-	if *instance.Spec.MetadataServiceTemplate.Enabled {
+	if instance.Spec.MetadataServiceTemplate.Enabled != nil && *instance.Spec.MetadataServiceTemplate.Enabled {
 		result, err = r.ensureMetadata(ctx, instance)
 		if err != nil {
 			return result, err
@@ -246,7 +246,7 @@ func (r *NovaCellReconciler) Reconcile(ctx context.Context, req ctrl.Request) (r
 	}
 	instance.Status.Hash[novav1.ComputeDiscoverHashKey] = computeTemplatesHash
 
-	cellHasVNCService := (*instance.Spec.NoVNCProxyServiceTemplate.Enabled)
+	cellHasVNCService := instance.Spec.NoVNCProxyServiceTemplate.Enabled != nil && (*instance.Spec.NoVNCProxyServiceTemplate.Enabled)
 	if cellHasVNCService {
 		result, err = r.ensureNoVNCProxy(ctx, instance)
 		if err != nil {

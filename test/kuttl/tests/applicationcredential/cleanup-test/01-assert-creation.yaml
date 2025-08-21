@@ -1,0 +1,25 @@
+# Verify the ApplicationCredential was created and is ready with all conditions
+apiVersion: keystone.openstack.org/v1beta1
+kind: KeystoneApplicationCredential
+metadata:
+  name: nova-cleanup-credential
+status:
+  conditions:
+    - type: Ready
+      status: "True"
+    - type: ApplicationCredentialReady
+      status: "True"
+    - type: InputReady
+      status: "True"
+    - type: KeystoneAPIReady
+      status: "True"
+
+---
+# Verify the generated secret exists with mock data
+apiVersion: v1
+kind: Secret
+metadata:
+  name: nova-cleanup-credential-application-credential
+data:
+  id: dGVzdC1hcHAtY3JlZC1pZC1ub3ZhLWNsZWFudXAtY3JlZGVudGlhbA== # test-app-cred-id-nova-cleanup-credential (base64)
+  secret: dGVzdC1hcHAtY3JlZC1zZWNyZXQtbm92YS1jbGVhbnVwLWNyZWRlbnRpYWw= # test-app-cred-secret-nova-cleanup-credential (base64)

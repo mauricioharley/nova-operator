@@ -1,0 +1,21 @@
+# KUTTL test relies on the ApplicationCredential controller's built-in test environment detection
+# and mock credential creation for environments without KeystoneAPI
+
+# Create secret and ApplicationCredential for cleanup testing
+apiVersion: v1
+kind: Secret
+metadata:
+  name: nova-service-password
+data:
+  ServicePassword: dGVzdDEyMw==
+
+---
+apiVersion: keystone.openstack.org/v1beta1
+kind: KeystoneApplicationCredential
+metadata:
+  name: nova-cleanup-credential
+spec:
+  userName: nova
+  secret: nova-service-password
+  expirationDays: 5
+  gracePeriodDays: 1

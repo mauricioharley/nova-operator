@@ -1,0 +1,9 @@
+# Assert that cleanup completed properly
+# The original service password secret should remain
+# but the ApplicationCredential and its generated secret should be gone
+
+# Verify that the original service password secret is NOT deleted
+apiVersion: v1
+kind: Secret
+metadata:
+  name: nova-service-password

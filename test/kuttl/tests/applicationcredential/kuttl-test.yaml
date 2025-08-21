@@ -1,0 +1,10 @@
+apiVersion: kuttl.dev/v1beta1
+kind: TestSuite
+metadata:
+  name: applicationcredential
+testDirs:
+- ./basic-functionality
+- ./cleanup-test
+timeout: 300
+startControllers: false
+parallel: 1

@@ -634,7 +634,7 @@ func (r *NovaReconciler) Reconcile(ctx context.Context, req ctrl.Request) (resul
 		return result, err
 	}
 
-	if *instance.Spec.MetadataServiceTemplate.Enabled {
+	if instance.Spec.MetadataServiceTemplate.Enabled != nil && *instance.Spec.MetadataServiceTemplate.Enabled {
 		result, err = r.ensureMetadata(
 			ctx, instance, cell0Template,
 			cellDBs[novav1.Cell0Name].Database, apiDB, keystoneInternalAuthURL,
@@ -2006,7 +2006,7 @@ func (r *NovaReconciler) ensureCellSecret(
 
 	// If metadata is enabled in the cell then the cell secret needs the
 	// metadata shared secret
-	if *cellTemplate.MetadataServiceTemplate.Enabled {
+	if cellTemplate.MetadataServiceTemplate.Enabled != nil && *cellTemplate.MetadataServiceTemplate.Enabled {
 		val, ok := externalSecret.Data[instance.Spec.PasswordSelectors.PrefixMetadataCellsSecret+cellName]
 		if ok {
 			data[MetadataSecretSelector] = string(val)

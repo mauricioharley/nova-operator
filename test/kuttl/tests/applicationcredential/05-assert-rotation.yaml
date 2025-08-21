@@ -1,0 +1,22 @@
+# Assert that the rotating credential was created successfully
+
+apiVersion: keystone.openstack.org/v1beta1
+kind: KeystoneApplicationCredential
+metadata:
+  name: nova-rotating-credential
+status:
+  conditions:
+    - type: Ready
+      status: "True"
+    - type: ApplicationCredentialReady
+      status: "True"
+
+---
+# Assert that the rotating credential's secret was created
+apiVersion: v1
+kind: Secret
+metadata:
+  name: nova-rotating-credential-application-credential
+data:
+  id: ~ # Should contain the credential ID
+  secret: ~ # Should contain the credential secret
